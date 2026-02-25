@@ -164,3 +164,44 @@ function ujJatek() {
 
     }, 800);
 }
+function ellenoriz(parokSzama) {
+    zarolva = true; // lépek összehasonlítása alatt ne lehessen újabb képet megfordítani
+    lepesek++; // lépések számlálása minden két megfordított kártya után
+    lepesKiir.textContent = lepesek;
+
+    const elsoKep = elso.querySelector("img").src;
+    const masodikKep = masodik.querySelector("img").src;
+
+    if (elsoKep === masodikKep) {
+        //jó találat
+        talalat++;
+        pontok += 300;       // --> kap 300 pontot
+        voltMarTalalat = true; // az elso talaltig nem von le pontot, de utana minden rossz talalatnal vonunk le 100 pontot
+
+        elso = null;
+        masodik = null;
+        zarolva = false;
+        // Szint teljesítése ellenőrzése
+        if (talalat === parokSzama) {
+            clearInterval(idoInterval);
+            uzenet.textContent = `🎉 Szint teljesítve! Pontszám: ${pontok} | Lépések: ${lepesek} | Idő: ${idoFormatum(ido)} mp.`;
+        }
+    } else {
+        //rossz talalat
+        if (voltMarTalalat) {
+            pontok -= 100;   // Csak akkor vonunk le, ha már volt korábban találata
+        }
+        // Kártyák visszafordítása 800ms múlva
+        setTimeout(() => {
+            elso.classList.remove("megforditva");
+            masodik.classList.remove("megforditva");
+            elso = null;
+            masodik = null;
+            zarolva = false;
+        }, 800);
+    }
+
+    if (pontKiir) pontKiir.textContent = pontok; //pontszám kijelző frissítése minden ellenőrzés után
+}
+
+ujJatek();
