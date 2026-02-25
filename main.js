@@ -81,10 +81,10 @@ function idoFormatum(osszMasodperc) {
 
     if (perc > 0) {
         // Ha eléri az egy percet, kiírja a perceket is
-        return ${perc}p ${mp < 10 ? '0' : ''}${mp};
+        return `${perc}p ${mp < 10 ? '0' : ''}${mp}`;
     } else {
         // Egy perc alatt csak a másodperceket írja
-        return ${mp} ;
+        return `${mp} `;
     }
 }
 
