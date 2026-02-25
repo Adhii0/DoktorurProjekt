@@ -51,3 +51,39 @@ let kartyakTartalom = [
     "kepek/verok2.jpeg",
     "kepek/vityo.jpg",
 ];
+// HTML elemek lekéréses
+const szintSelect = document.getElementById("szint");
+const jatek = document.getElementById("jatek");
+const lepesKiir = document.getElementById("lepesek");
+const uzenet = document.getElementById("uzenet");
+const pontKiir = document.getElementById("pontszam");
+const idoKiir = document.getElementById("ido");
+
+// Játék állapotának változói
+let elso = null;
+let masodik = null;
+let zarolva = false;
+let lepesek = 0;
+let talalat = 0;
+let pontok = 0;
+let voltMarTalalat = false;
+let ido = 0;
+let idoInterval = null;
+
+// Keverő függvény a kártyák véletlenszerű sorrendjéhez
+function kever(tomb) {
+    return tomb.sort(() => Math.random() - 0.5);
+}
+
+function idoFormatum(osszMasodperc) {
+    const perc = Math.floor(osszMasodperc / 60);
+    const mp = osszMasodperc % 60;
+
+    if (perc > 0) {
+        // Ha eléri az egy percet, kiírja a perceket is
+        return ${perc}p ${mp < 10 ? '0' : ''}${mp};
+    } else {
+        // Egy perc alatt csak a másodperceket írja
+        return ${mp} ;
+    }
+}
